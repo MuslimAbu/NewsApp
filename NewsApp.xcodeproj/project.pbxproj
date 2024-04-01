@@ -13,6 +13,13 @@
 		DB6928A62BB1CBCE0089FCB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB6928A52BB1CBCE0089FCB1 /* Assets.xcassets */; };
 		DB6928A92BB1CBCE0089FCB1 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DB6928A82BB1CBCE0089FCB1 /* Base */; };
 		DB6928B32BB30BC70089FCB1 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928B22BB30BC70089FCB1 /* NewsListViewController.swift */; };
+		DB6928B52BB31D860089FCB1 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928B42BB31D860089FCB1 /* Colors.swift */; };
+		DB6928B72BB31FB60089FCB1 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928B62BB31FB60089FCB1 /* MainTabBarController.swift */; };
+		DB6928BA2BB470E20089FCB1 /* FavoriteNewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928B92BB470E20089FCB1 /* FavoriteNewsListViewController.swift */; };
+		DB6928BC2BB707DD0089FCB1 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928BB2BB707DD0089FCB1 /* Article.swift */; };
+		DB6928BE2BB70D890089FCB1 /* NewsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928BD2BB70D890089FCB1 /* NewsListTableViewCell.swift */; };
+		DB6928C32BB994080089FCB1 /* NewsInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928C22BB994080089FCB1 /* NewsInfoViewController.swift */; };
+		DB6928C52BB9947A0089FCB1 /* NewsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928C42BB9947A0089FCB1 /* NewsInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +31,13 @@
 		DB6928A82BB1CBCE0089FCB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB6928AA2BB1CBCE0089FCB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB6928B22BB30BC70089FCB1 /* NewsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewController.swift; sourceTree = "<group>"; };
+		DB6928B42BB31D860089FCB1 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		DB6928B62BB31FB60089FCB1 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		DB6928B92BB470E20089FCB1 /* FavoriteNewsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNewsListViewController.swift; sourceTree = "<group>"; };
+		DB6928BB2BB707DD0089FCB1 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		DB6928BD2BB70D890089FCB1 /* NewsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListTableViewCell.swift; sourceTree = "<group>"; };
+		DB6928C22BB994080089FCB1 /* NewsInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsInfoViewController.swift; sourceTree = "<group>"; };
+		DB6928C42BB9947A0089FCB1 /* NewsInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +70,8 @@
 		DB6928982BB1CBCD0089FCB1 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				DB6928C12BB993B70089FCB1 /* NewsInfo */,
+				DB6928B82BB470830089FCB1 /* Favorite */,
 				DB6928B12BB30B820089FCB1 /* NewsList */,
 				DB6928992BB1CBCD0089FCB1 /* AppDelegate.swift */,
 				DB69289B2BB1CBCD0089FCB1 /* SceneDelegate.swift */,
@@ -63,6 +79,9 @@
 				DB6928A72BB1CBCE0089FCB1 /* LaunchScreen.storyboard */,
 				DB6928AA2BB1CBCE0089FCB1 /* Info.plist */,
 				DB6928A22BB1CBCD0089FCB1 /* NewsApp.xcdatamodeld */,
+				DB6928B62BB31FB60089FCB1 /* MainTabBarController.swift */,
+				DB6928B42BB31D860089FCB1 /* Colors.swift */,
+				DB6928BB2BB707DD0089FCB1 /* Article.swift */,
 			);
 			path = NewsApp;
 			sourceTree = "<group>";
@@ -70,9 +89,35 @@
 		DB6928B12BB30B820089FCB1 /* NewsList */ = {
 			isa = PBXGroup;
 			children = (
+				DB6928BF2BB70D960089FCB1 /* Views */,
 				DB6928B22BB30BC70089FCB1 /* NewsListViewController.swift */,
 			);
 			path = NewsList;
+			sourceTree = "<group>";
+		};
+		DB6928B82BB470830089FCB1 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				DB6928B92BB470E20089FCB1 /* FavoriteNewsListViewController.swift */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		DB6928BF2BB70D960089FCB1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DB6928BD2BB70D890089FCB1 /* NewsListTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DB6928C12BB993B70089FCB1 /* NewsInfo */ = {
+			isa = PBXGroup;
+			children = (
+				DB6928C22BB994080089FCB1 /* NewsInfoViewController.swift */,
+				DB6928C42BB9947A0089FCB1 /* NewsInfoView.swift */,
+			);
+			path = NewsInfo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,7 +191,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB69289A2BB1CBCD0089FCB1 /* AppDelegate.swift in Sources */,
+				DB6928BE2BB70D890089FCB1 /* NewsListTableViewCell.swift in Sources */,
+				DB6928C52BB9947A0089FCB1 /* NewsInfoView.swift in Sources */,
+				DB6928B52BB31D860089FCB1 /* Colors.swift in Sources */,
+				DB6928B72BB31FB60089FCB1 /* MainTabBarController.swift in Sources */,
+				DB6928BA2BB470E20089FCB1 /* FavoriteNewsListViewController.swift in Sources */,
+				DB6928BC2BB707DD0089FCB1 /* Article.swift in Sources */,
 				DB6928A42BB1CBCD0089FCB1 /* NewsApp.xcdatamodeld in Sources */,
+				DB6928C32BB994080089FCB1 /* NewsInfoViewController.swift in Sources */,
 				DB69289C2BB1CBCD0089FCB1 /* SceneDelegate.swift in Sources */,
 				DB6928B32BB30BC70089FCB1 /* NewsListViewController.swift in Sources */,
 			);
