@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB5635112BC1713A00A6E76C /* Chango-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB5635102BC1713A00A6E76C /* Chango-Regular.ttf */; };
+		DB5635132BC1750000A6E76C /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5635122BC1750000A6E76C /* Fonts.swift */; };
 		DB69289A2BB1CBCD0089FCB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928992BB1CBCD0089FCB1 /* AppDelegate.swift */; };
 		DB69289C2BB1CBCD0089FCB1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69289B2BB1CBCD0089FCB1 /* SceneDelegate.swift */; };
 		DB6928A42BB1CBCD0089FCB1 /* NewsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB6928A22BB1CBCD0089FCB1 /* NewsApp.xcdatamodeld */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DB5635102BC1713A00A6E76C /* Chango-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Chango-Regular.ttf"; path = "../../../../../Downloads/Chango/Chango-Regular.ttf"; sourceTree = "<group>"; };
+		DB5635122BC1750000A6E76C /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		DB6928962BB1CBCD0089FCB1 /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB6928992BB1CBCD0089FCB1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB69289B2BB1CBCD0089FCB1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB56350F2BC1712600A6E76C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DB5635122BC1750000A6E76C /* Fonts.swift */,
+				DB5635102BC1713A00A6E76C /* Chango-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		DB69288D2BB1CBCD0089FCB1 = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +95,7 @@
 				DB6928B62BB31FB60089FCB1 /* MainTabBarController.swift */,
 				DB6928B42BB31D860089FCB1 /* Colors.swift */,
 				DB6928BB2BB707DD0089FCB1 /* Article.swift */,
+				DB56350F2BC1712600A6E76C /* Fonts */,
 			);
 			path = NewsApp;
 			sourceTree = "<group>";
@@ -179,6 +193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB6928A62BB1CBCE0089FCB1 /* Assets.xcassets in Resources */,
+				DB5635112BC1713A00A6E76C /* Chango-Regular.ttf in Resources */,
 				DB6928A92BB1CBCE0089FCB1 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -194,6 +209,7 @@
 				DB6928BE2BB70D890089FCB1 /* NewsListTableViewCell.swift in Sources */,
 				DB6928C52BB9947A0089FCB1 /* NewsInfoView.swift in Sources */,
 				DB6928B52BB31D860089FCB1 /* Colors.swift in Sources */,
+				DB5635132BC1750000A6E76C /* Fonts.swift in Sources */,
 				DB6928B72BB31FB60089FCB1 /* MainTabBarController.swift in Sources */,
 				DB6928BA2BB470E20089FCB1 /* FavoriteNewsListViewController.swift in Sources */,
 				DB6928BC2BB707DD0089FCB1 /* Article.swift in Sources */,
