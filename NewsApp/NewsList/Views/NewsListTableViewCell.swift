@@ -84,7 +84,7 @@ final class NewsListTableViewCell: UITableViewCell {
         timestampLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
     }
     
-    func configure(image: UIImage, title: String, timestamp: String) {
+    func configure(image: UIImage, title: String?, timestamp: String) {
         articleImageView.image = image
         titleLabel.text = title
         timestampLabel.text = timestamp

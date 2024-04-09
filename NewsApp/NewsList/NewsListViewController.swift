@@ -9,13 +9,9 @@ import UIKit
 
 final class NewsListViewController: UIViewController {
     
-    private var items = [
-        Article(image: UIImage(named: "cat")!, title: "Cats safari, lets go party every day and every night"),
-        Article(image: UIImage(named: "cat")!, title: "Cats safari, lets go party every day and every night"),
-        Article(image: UIImage(named: "cat")!, title: "Cats safari, lets go party every day and every night"),
-        Article(image: UIImage(named: "cat")!, title: "Cats safari, lets go party every day and every night"),
-        Article(image: UIImage(named: "cat")!, title: "Cats safari, lets go party every day and every night")
-    ]
+    private var items: [Article] = []
+    private let networkService = ArticleListNetworkService()
+    private var page = 1
     
     private var tableView: UITableView = {
         let tableView = UITableView()
@@ -56,11 +52,18 @@ final class NewsListViewController: UIViewController {
         
         activityIndicator.startAnimating()
         
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) {_ in 
-            self.activityIndicator.stopAnimating()
-            self.tableView.dataSource = self
-            self.tableView.delegate = self
-            self.tableView.reloadData()
+        fetchData()
+    }
+    
+    private func fetchData() {
+        networkService.fetchData(page: page) {[weak self] articles in
+            guard let self = self else {return}
+            
+            DispatchQueue.main.async {
+                self.items += articles
+                self.activityIndicator.stopAnimating()
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -87,6 +90,20 @@ final class NewsListViewController: UIViewController {
     private func searchButtonTapped() {
         
     }
+    
+    private func showTableFooterView() {
+        let view = UIView(
+            frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 100))
+        
+        let activityIndicator = UIActivityIndicatorView()
+        view.addSubview(activityIndicator)
+        
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.startAnimating()
+        
+        tableView.tableFooterView = view
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -106,7 +123,7 @@ extension NewsListViewController: UITableViewDataSource {
         let item = items[indexPath.row]
         
         cell.selectionStyle = .none
-        cell.configure(image: item.image, title: item.title, timestamp: item.timestamp)
+        cell.configure(image: UIImage(), title: item.title, timestamp: "10 mins")
         
         return cell
     }
@@ -120,5 +137,12 @@ extension NewsListViewController: UITableViewDelegate {
         let vc = NewsInfoViewController(item: item)
         
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard indexPath.row == items.count - 5 else {return}
+            showTableFooterView()
+            page += 1
+            fetchData()
     }
 }
