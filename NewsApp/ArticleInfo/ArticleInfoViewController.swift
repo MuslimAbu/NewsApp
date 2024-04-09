@@ -38,7 +38,7 @@ final class NewsInfoViewController: UIViewController {
 
         view.backgroundColor = .white
         
-        mainView.configuere(image: item.image, title: item.title)
+        mainView.configuere(image: UIImage(), title: item.title, description: item.description)
     }
 
 }
