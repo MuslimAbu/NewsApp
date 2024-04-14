@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class NewsInfoView: UIView {
+final class ArticleInfoView: UIView {
     
     //MARK: - UI Elements
     
@@ -48,6 +48,15 @@ final class NewsInfoView: UIView {
         return textView
     }()
     
+    let goToSourceButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Go to source", for: .normal)
+        button.backgroundColor = .lightGray
+        button.layer.cornerRadius = 16
+        return button
+    }()
+    
     // MARK: - Init
     
     init() {
@@ -63,11 +72,17 @@ final class NewsInfoView: UIView {
     // MARK: - Private methods
     
     private func setup() {
+        
+        setupLayout()
+    }
+    
+    private func setupLayout() {
         setupScrollViewLayout()
         setupContentViewLayout()
         setupImageViewLayout()
         setupTitleLabelLayout()
         setupDescriptionTextViewLayout()
+        setupGoToSourceButtonLayout()
     }
     
     private func setupScrollViewLayout() {
@@ -112,7 +127,14 @@ final class NewsInfoView: UIView {
         descriptionTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
         descriptionTextView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         descriptionTextView.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
-        descriptionTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+    }
+    
+    private func setupGoToSourceButtonLayout() {
+        contentView.addSubview(goToSourceButton)
+        
+        goToSourceButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        goToSourceButton.topAnchor.constraint(equalTo: descriptionTextView.bottomAnchor, constant: 24).isActive = true
+        goToSourceButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24).isActive = true
     }
     
     private func updateDescription(_ text: String?) {
@@ -131,7 +153,7 @@ final class NewsInfoView: UIView {
         )
     }
     
-    func configuere(image: UIImage, title: String?, description: String?) {
+    func configuere(image: UIImage, title: String, description: String) {
         imageView.image = image
         titleLabel.text = title
         

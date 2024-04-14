@@ -6,19 +6,21 @@
 //
 
 import UIKit
+import SafariServices
 
-final class NewsInfoViewController: UIViewController {
+final class ArticleInfoViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private let mainView = NewsInfoView()
-    
+    private let mainView = ArticleInfoView()
     private let item: Article
+    private let image: UIImage
     
     // MARK: - Init
     
-    init(item: Article) {
+    init(item: Article, image: UIImage) {
         self.item = item
+        self.image = image
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,7 +40,19 @@ final class NewsInfoViewController: UIViewController {
 
         view.backgroundColor = .white
         
-        mainView.configuere(image: UIImage(), title: item.title, description: item.description)
+        mainView.configuere(image: image, title: item.title, description: item.description)
+        
+        mainView.goToSourceButton.addTarget(self, action: #selector(goToSourceButtonTapped), for: .touchDown)
+    }
+    
+    //MARK: - Private Methods
+    
+    @objc
+    
+    private func goToSourceButtonTapped() {
+        let vc = SFSafariViewController(url: item.url)
+        
+        present(vc, animated: true)
     }
 
 }

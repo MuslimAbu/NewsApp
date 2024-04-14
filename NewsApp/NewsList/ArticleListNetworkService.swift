@@ -9,10 +9,16 @@ import Foundation
 
 final class ArticleListNetworkService {
     
+    private let imagesProvider: ImagesProvider
+    
     private var page = 1
     
+    init(imagesProvider: ImagesProvider) {
+        self.imagesProvider = imagesProvider
+    }
+    
     private var urlString: String {
-        "https://newsapi.org/v2/everything?q=tesla&from=2024-03-09&sortBy=publishedAt&apiKey=2e482f6ca0464157b484417919eb343e&language=ru&page=\(page)"
+        "https://newsapi.org/v2/everything?q=tesla&sortBy=publishedAt&apiKey=2e482f6ca0464157b484417919eb343e&language=ru&page=\(page)"
     }
     
     func fetchData(page: Int, completion: @escaping ([Article]) -> Void) {
@@ -36,7 +42,34 @@ final class ArticleListNetworkService {
                 print("can not decode data")
                 return
             }
-            completion(result.articles)
+            
+            let articles = self.convert(from: result.articles)
+            
+            self.imagesProvider.prefetchImages(urls: articles.map { $0.urlToImage})
+            
+            completion(articles)
         }.resume()
+    }
+    
+    private func convert(from result: [ArticleResult]) -> [Article]{
+        let articles: [Article] = result.compactMap { item in
+            guard let title = item.title,
+                  let description = item.description,
+                  let author = item.author,
+                  let urlToImage = item.urlToImage,
+                  let url = item.url
+            else {
+               return nil
+            }
+            return Article(
+                title: title,
+                description: description,
+                author: author, 
+                urlToImage: urlToImage,
+                url: url,
+                publishedAt: item.publishedAt
+            )
+        }
+        return articles
     }
 }

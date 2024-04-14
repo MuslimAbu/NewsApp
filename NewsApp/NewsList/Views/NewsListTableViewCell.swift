@@ -29,6 +29,14 @@ final class NewsListTableViewCell: UITableViewCell {
         return label
     }()
     
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .lightGray
+        label.numberOfLines = 1
+        return label
+    }()
+    
     private var timestampLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -48,6 +56,14 @@ final class NewsListTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        articleImageView.image = nil
+        titleLabel.text = nil
+        descriptionLabel.text = nil
+        timestampLabel.text = nil
+    }
     
     // MARK: - Private methods
     
@@ -56,37 +72,61 @@ final class NewsListTableViewCell: UITableViewCell {
         
         setupArticleImageViewLayout()
         setupTitleLabelLayout()
+        setupDescriptionLabelLayout()
         setupTimestampLabelLayout()
-        
     }
     
     private func setupArticleImageViewLayout() {
         contentView.addSubview(articleImageView)
         
         articleImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        articleImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32).isActive = true
-        articleImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        articleImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        articleImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
+        articleImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        articleImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
     
     private func setupTitleLabelLayout() {
         contentView.addSubview(titleLabel)
         
         titleLabel.leadingAnchor.constraint(equalTo: articleImageView.trailingAnchor, constant: 16).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
         titleLabel.topAnchor.constraint(equalTo: articleImageView.topAnchor).isActive = true
+    }
+    
+    private func setupDescriptionLabelLayout() {
+        contentView.addSubview(descriptionLabel)
+        
+        descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4).isActive = true
+        descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
     }
     
     private func setupTimestampLabelLayout() {
         contentView.addSubview(timestampLabel)
         
         timestampLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
-        timestampLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        timestampLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 4).isActive = true
     }
     
-    func configure(image: UIImage, title: String?, timestamp: String) {
+    func configure(article: Article, image: UIImage) {
         articleImageView.image = image
-        titleLabel.text = title
-        timestampLabel.text = timestamp
+        titleLabel.text = article.title
+        descriptionLabel.text = article.description
+        
+        updateDate(dateResult: article.publishedAt)
+    }
+    
+    private func updateDate(dateResult: String?) {
+        guard let dateResult = dateResult else {return}
+        
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateStyle = .medium
+        
+        let date = formatter.date(from: dateResult) ?? Date()
+        
+        let string = formatter.string(from: Date())
+        
+        timestampLabel.text = string
     }
 }
