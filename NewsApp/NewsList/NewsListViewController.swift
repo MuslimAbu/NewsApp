@@ -10,7 +10,10 @@ import UIKit
 final class NewsListViewController: UIViewController {
     
     private var items: [Article] = []
-    private let networkService = ArticleListNetworkService()
+    
+    private lazy var networkService = ArticleListNetworkService(imagesProvider: imagesProvider)
+    
+    private let imagesProvider = ImagesProvider()
     private var page = 1
     
     private var tableView: UITableView = {
@@ -18,7 +21,7 @@ final class NewsListViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = Colors.mainColor
         tableView.separatorStyle = .none
-        tableView.rowHeight = 100
+        tableView.rowHeight = 120
         return tableView
     }()
     
@@ -59,7 +62,7 @@ final class NewsListViewController: UIViewController {
         networkService.fetchData(page: page) {[weak self] articles in
             guard let self = self else {return}
             
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.items += articles
                 self.activityIndicator.stopAnimating()
                 self.tableView.reloadData()
@@ -121,9 +124,10 @@ extension NewsListViewController: UITableViewDataSource {
             fatalError("Can not dequeue NewsListTableViewCell")
         }
         let item = items[indexPath.row]
+        let image = imagesProvider.image(for: item.urlToImage)
         
         cell.selectionStyle = .none
-        cell.configure(image: UIImage(), title: item.title, timestamp: "10 mins")
+        cell.configure(article: item, image: image)
         
         return cell
     }
@@ -134,7 +138,8 @@ extension NewsListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = items[indexPath.row]
-        let vc = NewsInfoViewController(item: item)
+        let image = imagesProvider.image(for: item.urlToImage)
+        let vc = ArticleInfoViewController(item: item, image: image)
         
         navigationController?.pushViewController(vc, animated: true)
     }
