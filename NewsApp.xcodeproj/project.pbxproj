@@ -93,7 +93,7 @@
 			children = (
 				DB6928C12BB993B70089FCB1 /* ArticleInfo */,
 				DB6928B82BB470830089FCB1 /* Favorite */,
-				DB6928B12BB30B820089FCB1 /* NewsList */,
+				DB6928B12BB30B820089FCB1 /* ArticleList */,
 				DB56351A2BCAFA8B00A6E76C /* ImagesProvider.swift */,
 				DB6928992BB1CBCD0089FCB1 /* AppDelegate.swift */,
 				DB69289B2BB1CBCD0089FCB1 /* SceneDelegate.swift */,
@@ -111,14 +111,14 @@
 			path = NewsApp;
 			sourceTree = "<group>";
 		};
-		DB6928B12BB30B820089FCB1 /* NewsList */ = {
+		DB6928B12BB30B820089FCB1 /* ArticleList */ = {
 			isa = PBXGroup;
 			children = (
 				DB6928BF2BB70D960089FCB1 /* Views */,
 				DB6928B22BB30BC70089FCB1 /* NewsListViewController.swift */,
 				DB5635142BC2DE2500A6E76C /* ArticleListNetworkService.swift */,
 			);
-			path = NewsList;
+			path = ArticleList;
 			sourceTree = "<group>";
 		};
 		DB6928B82BB470830089FCB1 /* Favorite */ = {
