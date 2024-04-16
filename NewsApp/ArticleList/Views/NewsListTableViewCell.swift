@@ -108,25 +108,16 @@ final class NewsListTableViewCell: UITableViewCell {
         timestampLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 4).isActive = true
     }
     
-    func configure(article: Article, image: UIImage) {
-        articleImageView.image = image
+    func configure(article: Article, imagesProvider: ImagesProvider) {
         titleLabel.text = article.title
         descriptionLabel.text = article.description
+        timestampLabel.text = article.publishedAt
         
-        updateDate(dateResult: article.publishedAt)
+        imagesProvider.image(for: article.urlToImage) { [weak self] image in
+            DispatchQueue.main.async {
+                self?.articleImageView.image = image
+            }
+        }
     }
     
-    private func updateDate(dateResult: String?) {
-        guard let dateResult = dateResult else {return}
-        
-        let formatter = DateFormatter()
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.dateStyle = .medium
-        
-        let date = formatter.date(from: dateResult) ?? Date()
-        
-        let string = formatter.string(from: Date())
-        
-        timestampLabel.text = string
-    }
 }

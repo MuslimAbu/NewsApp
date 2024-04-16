@@ -9,13 +9,7 @@ import Foundation
 
 final class ArticleListNetworkService {
     
-    private let imagesProvider: ImagesProvider
-    
     private var page = 1
-    
-    init(imagesProvider: ImagesProvider) {
-        self.imagesProvider = imagesProvider
-    }
     
     private var urlString: String {
         "https://newsapi.org/v2/everything?q=tesla&sortBy=publishedAt&apiKey=2e482f6ca0464157b484417919eb343e&language=ru&page=\(page)"
@@ -45,8 +39,6 @@ final class ArticleListNetworkService {
             
             let articles = self.convert(from: result.articles)
             
-            self.imagesProvider.prefetchImages(urls: articles.map { $0.urlToImage})
-            
             completion(articles)
         }.resume()
     }
@@ -57,7 +49,8 @@ final class ArticleListNetworkService {
                   let description = item.description,
                   let author = item.author,
                   let urlToImage = item.urlToImage,
-                  let url = item.url
+                  let url = item.url,
+                  let publishedAt = publishedAt(for: item.publishedAt)
             else {
                return nil
             }
@@ -67,9 +60,22 @@ final class ArticleListNetworkService {
                 author: author, 
                 urlToImage: urlToImage,
                 url: url,
-                publishedAt: item.publishedAt
+                publishedAt: publishedAt
             )
         }
         return articles
+    }
+    
+    private func publishedAt(for dateResult: String?) -> String? {
+        guard let dateResult = dateResult,
+              let date = ISO8601DateFormatter().date(from: dateResult)
+        else {
+            return nil
+        }
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        
+        return formatter.string(from: date)
     }
 }

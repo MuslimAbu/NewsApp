@@ -13,6 +13,6 @@ struct Article {
     let author: String
     let urlToImage: URL
     let url: URL
-    let publishedAt: String?
+    let publishedAt: String
 }
 

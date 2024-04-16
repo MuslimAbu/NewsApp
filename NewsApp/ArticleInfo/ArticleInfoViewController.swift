@@ -43,16 +43,35 @@ final class ArticleInfoViewController: UIViewController {
         mainView.configuere(image: image, title: item.title, description: item.description)
         
         mainView.goToSourceButton.addTarget(self, action: #selector(goToSourceButtonTapped), for: .touchDown)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "square.and.arrow.up"),
+            style: .plain,
+            target: self,
+            action: #selector(shareButtonTapped)
+        )
     }
     
     //MARK: - Private Methods
     
     @objc
-    
     private func goToSourceButtonTapped() {
         let vc = SFSafariViewController(url: item.url)
         
         present(vc, animated: true)
     }
-
+    
+    @objc
+    private func shareButtonTapped() {
+        let vc = UIActivityViewController(
+            activityItems: [
+                image,
+                item.title,
+                "\n",
+                "Побробнее можно по ссылке: \(item.url)"
+            ],
+            applicationActivities: nil
+        )
+        present(vc, animated: true)
+    }
 }

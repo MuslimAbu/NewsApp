@@ -10,7 +10,7 @@ import UIKit
 final class MainTabBarController: UITabBarController {
     
     private var newsListViewController: UINavigationController {
-        let viewController = NewsListViewController()
+        let viewController = ArticleListViewControllerProvider.articleListViewController
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.tabBarItem = UITabBarItem(
             title: "News",
@@ -32,10 +32,21 @@ final class MainTabBarController: UITabBarController {
         return navigationController
     }
     
+    private var settingsNewsListViewController: UINavigationController {
+        let viewController = SettingsViewController()
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.tabBarItem = UITabBarItem(
+            title: "Settings",
+            image: UIImage(systemName: "slider.vertical.3"),
+            selectedImage: nil
+        )
+        return navigationController
+    }
+    
     init() {
         super.init(nibName: nil, bundle: nil)
         
-        viewControllers = [newsListViewController, favoriteNewsListViewController]
+        viewControllers = [newsListViewController, favoriteNewsListViewController, settingsNewsListViewController]
         
         tabBar.tintColor = .red
         

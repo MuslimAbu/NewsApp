@@ -7,14 +7,13 @@
 
 import UIKit
 
-final class NewsListViewController: UIViewController {
-    
-    private var items: [Article] = []
-    
-    private lazy var networkService = ArticleListNetworkService(imagesProvider: imagesProvider)
+final class ArticleListViewController: UIViewController {
     
     private let imagesProvider = ImagesProvider()
+    private lazy var networkService = ArticleListNetworkService()
+    
     private var page = 1
+    private var items: [Article] = []
     
     private var tableView: UITableView = {
         let tableView = UITableView()
@@ -62,7 +61,7 @@ final class NewsListViewController: UIViewController {
         networkService.fetchData(page: page) {[weak self] articles in
             guard let self = self else {return}
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            DispatchQueue.main.async {
                 self.items += articles
                 self.activityIndicator.stopAnimating()
                 self.tableView.reloadData()
@@ -111,7 +110,7 @@ final class NewsListViewController: UIViewController {
 
 // MARK: - UITableViewDataSource
 
-extension NewsListViewController: UITableViewDataSource {
+extension ArticleListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         items.count
     }
@@ -124,30 +123,30 @@ extension NewsListViewController: UITableViewDataSource {
             fatalError("Can not dequeue NewsListTableViewCell")
         }
         let item = items[indexPath.row]
-        let image = imagesProvider.image(for: item.urlToImage)
         
         cell.selectionStyle = .none
-        cell.configure(article: item, image: image)
+        cell.configure(article: item, imagesProvider: imagesProvider)
         
         return cell
     }
 }
 // MARK: - UITableViewDelegate
 
-extension NewsListViewController: UITableViewDelegate {
+extension ArticleListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = items[indexPath.row]
-        let image = imagesProvider.image(for: item.urlToImage)
+        let image = imagesProvider.image(for: item.urlToImage) ?? UIImage()
         let vc = ArticleInfoViewController(item: item, image: image)
         
         navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard indexPath.row == items.count - 5 else {return}
-            showTableFooterView()
-            page += 1
-            fetchData()
+        guard indexPath.row == items.count - 6 else { return }
+        
+        showTableFooterView()
+        page += 1
+        fetchData()
     }
 }

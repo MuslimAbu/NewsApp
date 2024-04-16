@@ -9,31 +9,31 @@ import UIKit
 
 final class ImagesProvider {
     
-    private var images: [String:UIImage] = [:]
+    private var images: [String:UIImage?] = [:]
     
-    func prefetchImages(urls: [URL]) {
-        guard urls.count > 15 else {return}
-        
-        for url in urls {
-            fetchImage(url: url)
-        }
-    }
-    
-    func image(for url: URL) -> UIImage {
+    func image(for url: URL) -> UIImage? {
         images[url.absoluteString] ?? UIImage()
     }
     
-    private func fetchImage(url: URL) {
+    func image(for url: URL, completion: @escaping (UIImage?) -> Void) {
+        if let image = images[url.absoluteString] {
+            completion(image)
+        } else {
+            fetchImage(url: url, completion: completion)
+        }
+    }
+    
+    private func fetchImage(url: URL, completion: @escaping (UIImage?) -> Void) {
         let urlRequest = URLRequest(url: url)
         
-        URLSession.shared.dataTask(with: urlRequest) {data,_,error in
-            guard let data = data, error == nil else {return}
+        URLSession.shared.dataTask(with: urlRequest) { data, _ ,error in
+            guard let data = data, error == nil else { return }
             
             let image = UIImage(data: data)
             
-            self.images[url.absoluteString] = image ?? UIImage()
+            self.images[url.absoluteString] = image
             
-            print(1)
+            completion(image)
         }.resume()
     }
 }
