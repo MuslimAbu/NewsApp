@@ -42,7 +42,7 @@ final class ArticleInfoViewController: UIViewController {
         
         mainView.configuere(image: image, title: item.title, description: item.description)
         
-        mainView.goToSourceButton.addTarget(self, action: #selector(goToSourceButtonTapped), for: .touchDown)
+       setupActions()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "square.and.arrow.up"),
@@ -53,6 +53,12 @@ final class ArticleInfoViewController: UIViewController {
     }
     
     //MARK: - Private Methods
+    
+    private func setupActions() {
+        mainView.goToSourceButton.addTarget(self, action: #selector(goToSourceButtonTapped), for: .touchDown)
+        mainView.addToFavoritesButton
+            .addTarget(self, action: #selector(addToFavoritesButtonTapped), for: .touchDown)
+    }
     
     @objc
     private func goToSourceButtonTapped() {
@@ -73,5 +79,11 @@ final class ArticleInfoViewController: UIViewController {
             applicationActivities: nil
         )
         present(vc, animated: true)
+    }
+    
+    @objc
+    private func addToFavoritesButtonTapped() {
+        mainView.isFavorite = !mainView.isFavorite
+        FavoriteStorage.shared.handle(item)
     }
 }

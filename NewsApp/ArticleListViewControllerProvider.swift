@@ -13,7 +13,7 @@ struct ArticleListViewControllerProvider {
         let isUpdatedModeEnabled = UserDefaults.standard.bool(forKey: "actionSwitch")
         
         if isUpdatedModeEnabled {
-            return UpdatedArticleListViewController()
+            return CarouselArticleListViewController()
         } else {
             return ArticleListViewController()
         }

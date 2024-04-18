@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Article {
+struct Article: Equatable {
     let title: String
     let description: String
     let author: String

@@ -9,6 +9,12 @@ import UIKit
 
 final class ArticleInfoView: UIView {
     
+    var isFavorite: Bool = false {
+        didSet {
+            updateAddToFavoritesButton()
+        }
+    }
+    
     //MARK: - UI Elements
     
     private let scrollView: UIScrollView = {
@@ -29,6 +35,7 @@ final class ArticleInfoView: UIView {
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
         imageView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -57,6 +64,14 @@ final class ArticleInfoView: UIView {
         return button
     }()
     
+    let addToFavoritesButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
+        button.tintColor = .white
+        return button
+    }()
+    
     // MARK: - Init
     
     init() {
@@ -72,7 +87,6 @@ final class ArticleInfoView: UIView {
     // MARK: - Private methods
     
     private func setup() {
-        
         setupLayout()
     }
     
@@ -83,6 +97,7 @@ final class ArticleInfoView: UIView {
         setupTitleLabelLayout()
         setupDescriptionTextViewLayout()
         setupGoToSourceButtonLayout()
+        setupAddToFavoritesButtonLayout()
     }
     
     private func setupScrollViewLayout() {
@@ -137,6 +152,15 @@ final class ArticleInfoView: UIView {
         goToSourceButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24).isActive = true
     }
     
+    private func setupAddToFavoritesButtonLayout() {
+        imageView.addSubview(addToFavoritesButton)
+        
+        addToFavoritesButton.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -24).isActive = true
+        addToFavoritesButton.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -24).isActive = true
+        addToFavoritesButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        addToFavoritesButton.widthAnchor.constraint(equalToConstant: 32).isActive = true
+    }
+    
     private func updateDescription(_ text: String?) {
         guard let text = text else { return }
         
@@ -153,10 +177,19 @@ final class ArticleInfoView: UIView {
         )
     }
     
+    private func updateAddToFavoritesButton() {
+        if isFavorite {
+            addToFavoritesButton.tintColor = .orange
+        } else {
+            addToFavoritesButton.tintColor = .white
+        }
+    }
+    
     func configuere(image: UIImage, title: String, description: String) {
         imageView.image = image
         titleLabel.text = title
         
         updateDescription(description)
+        updateAddToFavoritesButton()
     }
 }

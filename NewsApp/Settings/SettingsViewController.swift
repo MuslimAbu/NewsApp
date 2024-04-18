@@ -35,6 +35,7 @@ final class SettingsViewController: UIViewController {
         
         setupTitleLabelLayout()
         setupActionSwitchLayout()
+        actionSwitchToggle()
     }
     
     private func setupTitleLabelLayout() {

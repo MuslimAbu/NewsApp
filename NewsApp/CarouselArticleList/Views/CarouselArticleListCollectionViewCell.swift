@@ -1,22 +1,20 @@
 //
-//  NewsListTableViewCell.swift
+//  UpdatedArticleListCollectionViewCell.swift
 //  NewsApp
 //
-//  Created by Муслим on 29.03.2024.
+//  Created by Муслим on 17.04.2024.
 //
 
 import UIKit
 
-final class NewsListTableViewCell: UITableViewCell {
+final class CarouselArticleListCollectionViewCell: UICollectionViewCell {
     
-    static let reuseID = "NewsListTableViewCell"
-
-    // MARK: - UI Elements
+    static let reuseId = "CarouselArticleListCollectionViewCell"
     
     private let articleImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 4
+        imageView.layer.cornerRadius = 12
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -24,7 +22,7 @@ final class NewsListTableViewCell: UITableViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .boldSystemFont(ofSize: 16)
+        label.font = .boldSystemFont(ofSize: 24)
         label.numberOfLines = 2
         return label
     }()
@@ -37,18 +35,10 @@ final class NewsListTableViewCell: UITableViewCell {
         return label
     }()
     
-    private var timestampLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 13)
-        label.textColor = .lightGray
-        return label
-    }()
+    // MARK: - Init
     
-    // MARK: - UI Elements
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         setup()
     }
@@ -56,41 +46,35 @@ final class NewsListTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         
         articleImageView.image = nil
         titleLabel.text = nil
         descriptionLabel.text = nil
-        timestampLabel.text = nil
     }
     
-    // MARK: - Private methods
-    
     private func setup() {
-        contentView.backgroundColor = Colors.mainColor
-        
         setupArticleImageViewLayout()
         setupTitleLabelLayout()
         setupDescriptionLabelLayout()
-        setupTimestampLabelLayout()
     }
     
     private func setupArticleImageViewLayout() {
         contentView.addSubview(articleImageView)
         
-        articleImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        articleImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
-        articleImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        articleImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        articleImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8).isActive = true
+        articleImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).isActive = true
+        articleImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.8).isActive = true
     }
     
     private func setupTitleLabelLayout() {
         contentView.addSubview(titleLabel)
         
-        titleLabel.leadingAnchor.constraint(equalTo: articleImageView.trailingAnchor, constant: 16).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: articleImageView.topAnchor).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: articleImageView.leadingAnchor).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: articleImageView.trailingAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: articleImageView.bottomAnchor, constant: 8).isActive = true
     }
     
     private func setupDescriptionLabelLayout() {
@@ -101,17 +85,9 @@ final class NewsListTableViewCell: UITableViewCell {
         descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
     }
     
-    private func setupTimestampLabelLayout() {
-        contentView.addSubview(timestampLabel)
-        
-        timestampLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
-        timestampLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 4).isActive = true
-    }
-    
     func configure(article: Article, imagesProvider: ImagesProvider) {
         titleLabel.text = article.title
         descriptionLabel.text = article.description
-        timestampLabel.text = article.publishedAt
         
         imagesProvider.image(for: article.urlToImage) { [weak self] image in
             DispatchQueue.main.async {
