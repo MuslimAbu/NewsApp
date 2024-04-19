@@ -10,7 +10,7 @@ import UIKit
 final class NewsListTableViewCell: UITableViewCell {
     
     static let reuseID = "NewsListTableViewCell"
-
+    
     // MARK: - UI Elements
     
     private let articleImageView: UIImageView = {
@@ -115,7 +115,11 @@ final class NewsListTableViewCell: UITableViewCell {
         
         imagesProvider.image(for: article.urlToImage) { [weak self] image in
             DispatchQueue.main.async {
-                self?.articleImageView.image = image
+                if let image = image {
+                    self?.articleImageView.image = image
+                } else {
+                    self?.articleImageView.image = UIImage(named: "article")
+                }
             }
         }
     }

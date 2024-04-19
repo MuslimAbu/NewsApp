@@ -60,7 +60,7 @@ final class CarouselArticleListViewController: UIViewController {
     //MARK: - Private Methods
     
     private func fetchData() {
-        networkService.fetchData(page: page) {[weak self] articles in
+        networkService.fetchData(q: nil, page: page) {[weak self] articles in
             guard let self = self else {return}
             
             DispatchQueue.main.async {

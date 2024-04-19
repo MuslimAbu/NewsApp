@@ -11,14 +11,14 @@ final class ArticleListNetworkService {
     
     private var page = 1
     
-    private var urlString: String {
-        "https://newsapi.org/v2/everything?q=tesla&sortBy=publishedAt&apiKey=2e482f6ca0464157b484417919eb343e&language=ru&page=\(page)"
-    }
-    
-    func fetchData(page: Int, completion: @escaping ([Article]) -> Void) {
-        self.page = page
+    func fetchData(
+        q: String?,
+        page: Int,
+        completion: @escaping ([Article]) -> Void
+    ){
+        let urlString = urlString(q: q, page: page)
         
-        guard let url = URL(string: urlString) else {return}
+        guard let url = URL(string: urlString) else { return }
         
         let urlRequest = URLRequest(url: url)
         
@@ -41,6 +41,19 @@ final class ArticleListNetworkService {
             
             completion(articles)
         }.resume()
+    }
+    
+    private func urlString(q: String?, page: Int) -> String {
+        
+        var baseString = "https://newsapi.org/v2/everything?sortBy=publishedAt&apiKey=2e482f6ca0464157b484417919eb343e&language=ru"
+        
+        if let q = q {
+            baseString += "&q=\(q)"
+        }
+        
+        baseString += "&page=\(page)"
+        
+        return baseString
     }
     
     private func convert(from result: [ArticleResult]) -> [Article]{

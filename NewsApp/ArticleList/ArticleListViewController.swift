@@ -14,6 +14,10 @@ final class ArticleListViewController: UIViewController {
     
     private var page = 1
     private var items: [Article] = []
+    private var selectedCategory = Category.allNews
+    
+    
+    //MARK: - UI Elements
     
     private var tableView: UITableView = {
         let tableView = UITableView()
@@ -31,6 +35,10 @@ final class ArticleListViewController: UIViewController {
         return indicator
     }()
     
+    private let customNavigationLeftView = SelectCategoryView()
+    
+    //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,11 +52,18 @@ final class ArticleListViewController: UIViewController {
             action: #selector(searchButtonTapped)
         )
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectedCategoryViewTapped))
+        customNavigationLeftView.addGestureRecognizer(tapGesture)
+        customNavigationLeftView.configuere(title: selectedCategory.displayTitle)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            customView: customNavigationLeftView
+        )
+        
         setupTableViewLayout()
         setupActivityIndicatorLayout()
         
         tableView.register(NewsListTableViewCell.self, forCellReuseIdentifier: NewsListTableViewCell.reuseID)
-        
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -58,16 +73,19 @@ final class ArticleListViewController: UIViewController {
     }
     
     private func fetchData() {
-        networkService.fetchData(page: page) {[weak self] articles in
+        networkService.fetchData(q: selectedCategory.requestTitle, page: page) {[weak self] articles in
             guard let self = self else {return}
             
             DispatchQueue.main.async {
                 self.items += articles
                 self.activityIndicator.stopAnimating()
                 self.tableView.reloadData()
+                self.tableView.tableFooterView = nil
+                self.tableView.tableHeaderView = nil
             }
         }
     }
+    
     
     // MARK: - Private Methods
     
@@ -88,23 +106,33 @@ final class ArticleListViewController: UIViewController {
     }
     
     @objc
-    
     private func searchButtonTapped() {
         
     }
     
-    private func showTableFooterView() {
+    @objc
+    private func selectedCategoryViewTapped() {
+        let vc = SelectCategoryViewController(selectedItem: selectedCategory)
+        vc.delegate = self
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
+    private func TableLoadingView() -> UIView {
         let view = UIView(
             frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 100))
         
         let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.style = .large
+        activityIndicator.startAnimating()
+        
         view.addSubview(activityIndicator)
         
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        activityIndicator.startAnimating()
         
-        tableView.tableFooterView = view
+        return view
     }
 }
 
@@ -145,8 +173,26 @@ extension ArticleListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard indexPath.row == items.count - 6 else { return }
         
-        showTableFooterView()
+        tableView.tableFooterView = TableLoadingView()
         page += 1
+        fetchData()
+    }
+}
+
+//MARK: - SelectCategoryViewControllerDelegate
+
+extension ArticleListViewController: SelectCategoryViewControllerDelegate {
+    
+    func doneButtonTapped(selectedCategory: Category) {
+        if self.selectedCategory == selectedCategory {
+            return
+        }
+        
+        self.selectedCategory = selectedCategory
+        
+        customNavigationLeftView.configuere(title: selectedCategory.displayTitle)
+        tableView.tableHeaderView = TableLoadingView()
+        items = []
         fetchData()
     }
 }

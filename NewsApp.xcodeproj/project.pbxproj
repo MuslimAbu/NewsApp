@@ -18,6 +18,10 @@
 		DB5635232BCEFF3D00A6E76C /* ArticleListViewControllerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5635222BCEFF3D00A6E76C /* ArticleListViewControllerProvider.swift */; };
 		DB5635252BD027D100A6E76C /* CarouselArticleListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5635242BD027D100A6E76C /* CarouselArticleListCollectionViewCell.swift */; };
 		DB5635282BD13D3500A6E76C /* FavoriteStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5635272BD13D3500A6E76C /* FavoriteStorage.swift */; };
+		DB56352B2BD1657700A6E76C /* SelectCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB56352A2BD1657700A6E76C /* SelectCategoryViewController.swift */; };
+		DB56352D2BD179E800A6E76C /* SelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB56352C2BD179E800A6E76C /* SelectCategoryView.swift */; };
+		DB56352F2BD19E8700A6E76C /* SelectCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB56352E2BD19E8700A6E76C /* SelectCategoryTableViewCell.swift */; };
+		DB5635312BD2E1F600A6E76C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5635302BD2E1F600A6E76C /* Category.swift */; };
 		DB69289A2BB1CBCD0089FCB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928992BB1CBCD0089FCB1 /* AppDelegate.swift */; };
 		DB69289C2BB1CBCD0089FCB1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69289B2BB1CBCD0089FCB1 /* SceneDelegate.swift */; };
 		DB6928A42BB1CBCD0089FCB1 /* NewsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB6928A22BB1CBCD0089FCB1 /* NewsApp.xcdatamodeld */; };
@@ -45,6 +49,10 @@
 		DB5635222BCEFF3D00A6E76C /* ArticleListViewControllerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListViewControllerProvider.swift; sourceTree = "<group>"; };
 		DB5635242BD027D100A6E76C /* CarouselArticleListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselArticleListCollectionViewCell.swift; sourceTree = "<group>"; };
 		DB5635272BD13D3500A6E76C /* FavoriteStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteStorage.swift; sourceTree = "<group>"; };
+		DB56352A2BD1657700A6E76C /* SelectCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryViewController.swift; sourceTree = "<group>"; };
+		DB56352C2BD179E800A6E76C /* SelectCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryView.swift; sourceTree = "<group>"; };
+		DB56352E2BD19E8700A6E76C /* SelectCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryTableViewCell.swift; sourceTree = "<group>"; };
+		DB5635302BD2E1F600A6E76C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		DB6928962BB1CBCD0089FCB1 /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB6928992BB1CBCD0089FCB1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB69289B2BB1CBCD0089FCB1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +115,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		DB5635292BD1651E00A6E76C /* SelectCategory */ = {
+			isa = PBXGroup;
+			children = (
+				DB56352A2BD1657700A6E76C /* SelectCategoryViewController.swift */,
+				DB56352E2BD19E8700A6E76C /* SelectCategoryTableViewCell.swift */,
+			);
+			path = SelectCategory;
+			sourceTree = "<group>";
+		};
 		DB69288D2BB1CBCD0089FCB1 = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +143,7 @@
 		DB6928982BB1CBCD0089FCB1 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				DB5635292BD1651E00A6E76C /* SelectCategory */,
 				DB56351F2BCEFD7C00A6E76C /* CarouselArticleList */,
 				DB56351C2BCECD6700A6E76C /* Settings */,
 				DB6928C12BB993B70089FCB1 /* ArticleInfo */,
@@ -146,6 +164,8 @@
 				DB6928B42BB31D860089FCB1 /* Colors.swift */,
 				DB5635222BCEFF3D00A6E76C /* ArticleListViewControllerProvider.swift */,
 				DB56350F2BC1712600A6E76C /* Fonts */,
+				DB56352C2BD179E800A6E76C /* SelectCategoryView.swift */,
+				DB5635302BD2E1F600A6E76C /* Category.swift */,
 			);
 			path = NewsApp;
 			sourceTree = "<group>";
@@ -262,13 +282,17 @@
 				DB6928C52BB9947A0089FCB1 /* ArticleInfoView.swift in Sources */,
 				DB6928B52BB31D860089FCB1 /* Colors.swift in Sources */,
 				DB5635132BC1750000A6E76C /* Fonts.swift in Sources */,
+				DB56352B2BD1657700A6E76C /* SelectCategoryViewController.swift in Sources */,
 				DB6928B72BB31FB60089FCB1 /* MainTabBarController.swift in Sources */,
 				DB5635252BD027D100A6E76C /* CarouselArticleListCollectionViewCell.swift in Sources */,
 				DB6928BA2BB470E20089FCB1 /* FavoriteNewsListViewController.swift in Sources */,
 				DB5635172BC2EA9000A6E76C /* ArticlesResult.swift in Sources */,
 				DB6928BC2BB707DD0089FCB1 /* ArticleResult.swift in Sources */,
 				DB5635152BC2DE2500A6E76C /* ArticleListNetworkService.swift in Sources */,
+				DB56352D2BD179E800A6E76C /* SelectCategoryView.swift in Sources */,
 				DB6928A42BB1CBCD0089FCB1 /* NewsApp.xcdatamodeld in Sources */,
+				DB56352F2BD19E8700A6E76C /* SelectCategoryTableViewCell.swift in Sources */,
+				DB5635312BD2E1F600A6E76C /* Category.swift in Sources */,
 				DB56351E2BCECDA500A6E76C /* SettingsViewController.swift in Sources */,
 				DB5635232BCEFF3D00A6E76C /* ArticleListViewControllerProvider.swift in Sources */,
 				DB5635282BD13D3500A6E76C /* FavoriteStorage.swift in Sources */,

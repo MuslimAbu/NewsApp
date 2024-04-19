@@ -12,12 +12,13 @@ final class ImagesProvider {
     private var images: [String:UIImage?] = [:]
     
     func image(for url: URL) -> UIImage? {
-        images[url.absoluteString] ?? UIImage()
+        images[url.absoluteString] ?? UIImage(named: "article")
     }
     
     func image(for url: URL, completion: @escaping (UIImage?) -> Void) {
         if let image = images[url.absoluteString] {
-            completion(image)
+            completion(nil)
+            return
         } else {
             fetchImage(url: url, completion: completion)
         }
