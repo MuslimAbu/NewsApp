@@ -9,12 +9,12 @@ import UIKit
 
 final class ArticleListViewController: UIViewController {
     
-    private let imagesProvider = ImagesProvider()
-    private lazy var networkService = ArticleListNetworkService()
+    private var imagesProvider = ImagesProvider()
+    private let dataController = ArticleListDataController()
     
     private var page = 1
     private var items: [Article] = []
-    private var selectedCategory = Category.allNews
+    private var selectedCategory = Category.tesla
     
     
     //MARK: - UI Elements
@@ -36,6 +36,18 @@ final class ArticleListViewController: UIViewController {
     }()
     
     private let customNavigationLeftView = SelectCategoryView()
+    
+    //MARK: - Init
+    
+    init(imagesProvider: ImagesProvider) {
+        self.imagesProvider = imagesProvider
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - Lifecycle
     
@@ -63,7 +75,7 @@ final class ArticleListViewController: UIViewController {
         setupTableViewLayout()
         setupActivityIndicatorLayout()
         
-        tableView.register(NewsListTableViewCell.self, forCellReuseIdentifier: NewsListTableViewCell.reuseID)
+        tableView.register(ArticleListTableViewCell.self, forCellReuseIdentifier: ArticleListTableViewCell.reuseID)
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -73,7 +85,7 @@ final class ArticleListViewController: UIViewController {
     }
     
     private func fetchData() {
-        networkService.fetchData(q: selectedCategory.requestTitle, page: page) {[weak self] articles in
+        dataController.fetchData(q: selectedCategory.requestTitle, page: page) {[weak self] articles in
             guard let self = self else {return}
             
             DispatchQueue.main.async {
@@ -107,7 +119,8 @@ final class ArticleListViewController: UIViewController {
     
     @objc
     private func searchButtonTapped() {
-        
+        let vc = SearchResultViewController(items: items, imagesProvider: imagesProvider)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc
@@ -145,10 +158,10 @@ extension ArticleListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: NewsListTableViewCell.reuseID,
+            withIdentifier: ArticleListTableViewCell.reuseID,
             for: indexPath
-        ) as? NewsListTableViewCell else {
-            fatalError("Can not dequeue NewsListTableViewCell")
+        ) as? ArticleListTableViewCell else {
+            fatalError("Can not dequeue ArticleListTableViewCell")
         }
         let item = items[indexPath.row]
         

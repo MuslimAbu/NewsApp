@@ -41,6 +41,7 @@ final class ArticleInfoViewController: UIViewController {
         view.backgroundColor = .white
         
         mainView.configuere(image: image, title: item.title, description: item.description)
+        mainView.isFavorite = FavoriteStorage.shared.contains(item)
         
        setupActions()
         
@@ -56,8 +57,7 @@ final class ArticleInfoViewController: UIViewController {
     
     private func setupActions() {
         mainView.goToSourceButton.addTarget(self, action: #selector(goToSourceButtonTapped), for: .touchDown)
-        mainView.addToFavoritesButton
-            .addTarget(self, action: #selector(addToFavoritesButtonTapped), for: .touchDown)
+        mainView.addToFavoritesButton.addTarget(self, action: #selector(addToFavoritesButtonTapped), for: .touchDown)
     }
     
     @objc

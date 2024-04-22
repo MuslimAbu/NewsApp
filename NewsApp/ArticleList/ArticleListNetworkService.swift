@@ -9,12 +9,10 @@ import Foundation
 
 final class ArticleListNetworkService {
     
-    private var page = 1
-    
     func fetchData(
         q: String?,
         page: Int,
-        completion: @escaping ([Article]) -> Void
+        completion: @escaping (ArticlesResult) -> Void
     ){
         let urlString = urlString(q: q, page: page)
         
@@ -22,7 +20,7 @@ final class ArticleListNetworkService {
         
         let urlRequest = URLRequest(url: url)
         
-        URLSession.shared.dataTask(with: urlRequest) { data, _ , error in
+        URLSession.shared.dataTask(with: urlRequest) { data, response , error in
             if let error = error {
                 print(error)
                 return
@@ -33,13 +31,11 @@ final class ArticleListNetworkService {
             }
             
             guard let result = try? JSONDecoder().decode(ArticlesResult.self, from: data) else {
-                print("can not decode data")
+                print("Can not decode data")
                 return
             }
             
-            let articles = self.convert(from: result.articles)
-            
-            completion(articles)
+            completion(result)
         }.resume()
     }
     
@@ -56,7 +52,7 @@ final class ArticleListNetworkService {
         return baseString
     }
     
-    private func convert(from result: [ArticleResult]) -> [Article]{
+    private func convert(from result: [ArticleResult]) -> [Article] {
         let articles: [Article] = result.compactMap { item in
             guard let title = item.title,
                   let description = item.description,

@@ -22,6 +22,8 @@
 		DB56352D2BD179E800A6E76C /* SelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB56352C2BD179E800A6E76C /* SelectCategoryView.swift */; };
 		DB56352F2BD19E8700A6E76C /* SelectCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB56352E2BD19E8700A6E76C /* SelectCategoryTableViewCell.swift */; };
 		DB5635312BD2E1F600A6E76C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5635302BD2E1F600A6E76C /* Category.swift */; };
+		DB5635352BD3B8F100A6E76C /* ArticleListDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5635342BD3B8F100A6E76C /* ArticleListDataController.swift */; };
+		DB5635382BD5927500A6E76C /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5635372BD5927500A6E76C /* SearchResultViewController.swift */; };
 		DB69289A2BB1CBCD0089FCB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928992BB1CBCD0089FCB1 /* AppDelegate.swift */; };
 		DB69289C2BB1CBCD0089FCB1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69289B2BB1CBCD0089FCB1 /* SceneDelegate.swift */; };
 		DB6928A42BB1CBCD0089FCB1 /* NewsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB6928A22BB1CBCD0089FCB1 /* NewsApp.xcdatamodeld */; };
@@ -30,9 +32,9 @@
 		DB6928B32BB30BC70089FCB1 /* ArticleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928B22BB30BC70089FCB1 /* ArticleListViewController.swift */; };
 		DB6928B52BB31D860089FCB1 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928B42BB31D860089FCB1 /* Colors.swift */; };
 		DB6928B72BB31FB60089FCB1 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928B62BB31FB60089FCB1 /* MainTabBarController.swift */; };
-		DB6928BA2BB470E20089FCB1 /* FavoriteNewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928B92BB470E20089FCB1 /* FavoriteNewsListViewController.swift */; };
+		DB6928BA2BB470E20089FCB1 /* FavoriteArticleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928B92BB470E20089FCB1 /* FavoriteArticleListViewController.swift */; };
 		DB6928BC2BB707DD0089FCB1 /* ArticleResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928BB2BB707DD0089FCB1 /* ArticleResult.swift */; };
-		DB6928BE2BB70D890089FCB1 /* NewsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928BD2BB70D890089FCB1 /* NewsListTableViewCell.swift */; };
+		DB6928BE2BB70D890089FCB1 /* ArticleListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928BD2BB70D890089FCB1 /* ArticleListTableViewCell.swift */; };
 		DB6928C32BB994080089FCB1 /* ArticleInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928C22BB994080089FCB1 /* ArticleInfoViewController.swift */; };
 		DB6928C52BB9947A0089FCB1 /* ArticleInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6928C42BB9947A0089FCB1 /* ArticleInfoView.swift */; };
 /* End PBXBuildFile section */
@@ -53,6 +55,8 @@
 		DB56352C2BD179E800A6E76C /* SelectCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryView.swift; sourceTree = "<group>"; };
 		DB56352E2BD19E8700A6E76C /* SelectCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryTableViewCell.swift; sourceTree = "<group>"; };
 		DB5635302BD2E1F600A6E76C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		DB5635342BD3B8F100A6E76C /* ArticleListDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListDataController.swift; sourceTree = "<group>"; };
+		DB5635372BD5927500A6E76C /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		DB6928962BB1CBCD0089FCB1 /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB6928992BB1CBCD0089FCB1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB69289B2BB1CBCD0089FCB1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,9 +67,9 @@
 		DB6928B22BB30BC70089FCB1 /* ArticleListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListViewController.swift; sourceTree = "<group>"; };
 		DB6928B42BB31D860089FCB1 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		DB6928B62BB31FB60089FCB1 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		DB6928B92BB470E20089FCB1 /* FavoriteNewsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNewsListViewController.swift; sourceTree = "<group>"; };
+		DB6928B92BB470E20089FCB1 /* FavoriteArticleListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteArticleListViewController.swift; sourceTree = "<group>"; };
 		DB6928BB2BB707DD0089FCB1 /* ArticleResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleResult.swift; sourceTree = "<group>"; };
-		DB6928BD2BB70D890089FCB1 /* NewsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListTableViewCell.swift; sourceTree = "<group>"; };
+		DB6928BD2BB70D890089FCB1 /* ArticleListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListTableViewCell.swift; sourceTree = "<group>"; };
 		DB6928C22BB994080089FCB1 /* ArticleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleInfoViewController.swift; sourceTree = "<group>"; };
 		DB6928C42BB9947A0089FCB1 /* ArticleInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +128,14 @@
 			path = SelectCategory;
 			sourceTree = "<group>";
 		};
+		DB5635362BD5920E00A6E76C /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				DB5635372BD5927500A6E76C /* SearchResultViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		DB69288D2BB1CBCD0089FCB1 = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +155,7 @@
 		DB6928982BB1CBCD0089FCB1 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				DB5635362BD5920E00A6E76C /* Search */,
 				DB5635292BD1651E00A6E76C /* SelectCategory */,
 				DB56351F2BCEFD7C00A6E76C /* CarouselArticleList */,
 				DB56351C2BCECD6700A6E76C /* Settings */,
@@ -176,6 +189,7 @@
 				DB6928BF2BB70D960089FCB1 /* Views */,
 				DB6928B22BB30BC70089FCB1 /* ArticleListViewController.swift */,
 				DB5635142BC2DE2500A6E76C /* ArticleListNetworkService.swift */,
+				DB5635342BD3B8F100A6E76C /* ArticleListDataController.swift */,
 			);
 			path = ArticleList;
 			sourceTree = "<group>";
@@ -183,7 +197,7 @@
 		DB6928B82BB470830089FCB1 /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
-				DB6928B92BB470E20089FCB1 /* FavoriteNewsListViewController.swift */,
+				DB6928B92BB470E20089FCB1 /* FavoriteArticleListViewController.swift */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -191,7 +205,7 @@
 		DB6928BF2BB70D960089FCB1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DB6928BD2BB70D890089FCB1 /* NewsListTableViewCell.swift */,
+				DB6928BD2BB70D890089FCB1 /* ArticleListTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -278,14 +292,16 @@
 			files = (
 				DB56351B2BCAFA8B00A6E76C /* ImagesProvider.swift in Sources */,
 				DB69289A2BB1CBCD0089FCB1 /* AppDelegate.swift in Sources */,
-				DB6928BE2BB70D890089FCB1 /* NewsListTableViewCell.swift in Sources */,
+				DB6928BE2BB70D890089FCB1 /* ArticleListTableViewCell.swift in Sources */,
 				DB6928C52BB9947A0089FCB1 /* ArticleInfoView.swift in Sources */,
 				DB6928B52BB31D860089FCB1 /* Colors.swift in Sources */,
 				DB5635132BC1750000A6E76C /* Fonts.swift in Sources */,
+				DB5635352BD3B8F100A6E76C /* ArticleListDataController.swift in Sources */,
 				DB56352B2BD1657700A6E76C /* SelectCategoryViewController.swift in Sources */,
 				DB6928B72BB31FB60089FCB1 /* MainTabBarController.swift in Sources */,
 				DB5635252BD027D100A6E76C /* CarouselArticleListCollectionViewCell.swift in Sources */,
-				DB6928BA2BB470E20089FCB1 /* FavoriteNewsListViewController.swift in Sources */,
+				DB5635382BD5927500A6E76C /* SearchResultViewController.swift in Sources */,
+				DB6928BA2BB470E20089FCB1 /* FavoriteArticleListViewController.swift in Sources */,
 				DB5635172BC2EA9000A6E76C /* ArticlesResult.swift in Sources */,
 				DB6928BC2BB707DD0089FCB1 /* ArticleResult.swift in Sources */,
 				DB5635152BC2DE2500A6E76C /* ArticleListNetworkService.swift in Sources */,

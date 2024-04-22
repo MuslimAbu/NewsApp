@@ -9,8 +9,10 @@ import UIKit
 
 final class CarouselArticleListViewController: UIViewController {
     
-    private let networkService = ArticleListNetworkService()
-    private let imagesProvider = ImagesProvider()
+    private let dataController = ArticleListDataController()
+    private let imagesProvider: ImagesProvider
+    
+    private var selectedCategory = Category.tesla
     
     private var page = 1
     
@@ -32,6 +34,18 @@ final class CarouselArticleListViewController: UIViewController {
         indicator.style = .large
         return indicator
     }()
+    
+    //MARK: - Init
+    
+    init(imagesProvider: ImagesProvider) {
+        self.imagesProvider = imagesProvider
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - Lifecycle
     
@@ -60,8 +74,8 @@ final class CarouselArticleListViewController: UIViewController {
     //MARK: - Private Methods
     
     private func fetchData() {
-        networkService.fetchData(q: nil, page: page) {[weak self] articles in
-            guard let self = self else {return}
+        dataController.fetchData(q: selectedCategory.requestTitle, page: page) {[weak self] articles in
+            guard let self = self else { return }
             
             DispatchQueue.main.async {
                 self.items += articles

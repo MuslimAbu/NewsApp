@@ -9,8 +9,10 @@ import UIKit
 
 final class MainTabBarController: UITabBarController {
     
+    private let imagesProvider = ImagesProvider()
+    
     private var newsListViewController: UINavigationController {
-        let viewController = ArticleListViewControllerProvider.articleListViewController
+        let viewController = ArticleListViewControllerProvider.articleListViewController(imagesProvider: imagesProvider)
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.tabBarItem = UITabBarItem(
             title: "News",
@@ -22,13 +24,14 @@ final class MainTabBarController: UITabBarController {
     }
     
     private var favoriteNewsListViewController: UINavigationController {
-        let viewController = FavoriteNewsListViewController()
+        let viewController = FavoriteArticleListViewController(imagesProvider: imagesProvider)
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.tabBarItem = UITabBarItem(
             title: "Saved",
             image: UIImage(systemName: "bookmark"),
             selectedImage: UIImage(systemName: "bookmark.fill")
         )
+        navigationController.navigationBar.tintColor = .black
         return navigationController
     }
     

@@ -190,6 +190,5 @@ final class ArticleInfoView: UIView {
         titleLabel.text = title
         
         updateDescription(description)
-        updateAddToFavoritesButton()
     }
 }

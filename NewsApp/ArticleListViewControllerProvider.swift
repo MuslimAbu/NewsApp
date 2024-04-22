@@ -9,13 +9,13 @@ import UIKit
 
 struct ArticleListViewControllerProvider {
     
-    static var articleListViewController: UIViewController {
+    static func articleListViewController(imagesProvider: ImagesProvider) -> UIViewController {
         let isUpdatedModeEnabled = UserDefaults.standard.bool(forKey: "actionSwitch")
         
         if isUpdatedModeEnabled {
-            return CarouselArticleListViewController()
+            return CarouselArticleListViewController(imagesProvider: imagesProvider)
         } else {
-            return ArticleListViewController()
+            return ArticleListViewController(imagesProvider: imagesProvider)
         }
     }
 }

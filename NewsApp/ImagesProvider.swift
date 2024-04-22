@@ -17,8 +17,7 @@ final class ImagesProvider {
     
     func image(for url: URL, completion: @escaping (UIImage?) -> Void) {
         if let image = images[url.absoluteString] {
-            completion(nil)
-            return
+            completion(image)
         } else {
             fetchImage(url: url, completion: completion)
         }

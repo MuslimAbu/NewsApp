@@ -5,9 +5,13 @@
 //  Created by Муслим on 18.04.2024.
 //
 
+import Foundation
+
 final class FavoriteStorage {
     
     static let shared = FavoriteStorage()
+    
+    static let favoritesChangedNotification = Notification.Name("favoritesChanged")
     
     var items: [Article] = []
     
@@ -19,6 +23,7 @@ final class FavoriteStorage {
         } else {
             items.append(element)
         }
+        NotificationCenter.default.post(name: FavoriteStorage.favoritesChangedNotification, object: nil)
     }
     
     func contains(_ element: Article) -> Bool {
